@@ -8,7 +8,7 @@ public class Main{
 
         Scanner sc = new Scanner(System.in);
         ControladorPelicula ctrlPelicula= new ControladorPelicula();
-
+        CatalogoCancion ctCancion= new CatalogoCancion();
 
         int opcionPrincipal; 
 
@@ -26,6 +26,7 @@ public class Main{
                     menuPeliculas(ctrlPelicula, sc);
                     break;
                 case 2:
+                    menuCancion(ctCancion, sc);
                     break;
                 case 0:
                     System.out.println("Saliendo del programa...");
@@ -57,7 +58,7 @@ public class Main{
             System.out.println("1. Agregar Elementos");
             System.out.println("2. Eliminar Elementos");
             System.out.println("3. Buscar por nombre");
-            System.out.println("4. Listar todos las elementos");
+            System.out.println("4. Listar todos los elementos");
             System.out.println("0. Volver al menú principal");
             System.out.print("Elige una opción: ");
             opcion = sc.nextInt();
@@ -89,9 +90,9 @@ public class Main{
                     System.out.print("Nombre a eliminar: ");
                     String elim = sc.nextLine();
                     if (ctrl.eliminarElementos(elim))
-                        System.out.println("Película eliminada correctamente.");
+                        System.out.println("Nombre eliminada correctamente.");
                     else
-                        System.out.println("No se encontró la película.");
+                        System.out.println("No se encontró la cancion.");
                     break;
 
                 case 3:
@@ -117,6 +118,63 @@ public class Main{
         } while(opcion != 0);
     }
 
+    public static void menuCancion(CatalogoCancion ctCancion, Scanner sc){
+        int opcionCancion;
+        do{
+             System.out.println("--- Menú Cancion ---");
+            System.out.println("1. Agregar Elementos");
+            System.out.println("2. Eliminar Elementos");
+            System.out.println("3. Buscar por nombre");
+            System.out.println("4. Listar todos los elementos");
+            System.out.println("0. Volver al menú principal");
+            System.out.print("Elige una opción: ");
+            opcionCancion = sc.nextInt();
+            sc.nextLine();
+            switch (opcionCancion) {
+                case 1:
+                    System.out.print("ID: ");
+                    int id = sc.nextInt(); 
+                    sc.nextLine();
+                    int suma = sumarDigitos(id);
+                    System.out.println("La suma de los dígitos de la matrícula es: " + suma);
+                    System.out.print("Nombre: ");
+                    String nombre = sc.nextLine();
+                     System.out.print("cantante: ");
+                    String cantante = sc.nextLine();
+                    sc.nextLine();
+                    System.out.print("Calificación: ");
+                    float calificacion = sc.nextFloat();
+                    sc.nextLine();
+                    System.out.print("Notas: ");
+                    String notas = sc.nextLine();
+                    ctCancion.addCancion(id, nombre, calificacion, cantante, notas);
+                    System.out.println("Canción agregada correctamente.");
+                    break;
+                case 2:
+                    System.out.print("Nombre a eliminar: ");
+                    String elim = sc.nextLine();
+                    if (ctCancion.eliminarElemento(elim))
+                        System.out.println("Canción eliminada correctamente.");
+                    else
+                        System.out.println("No se encontró la canción.");
+                    break;
+                case 3:
+                    System.out.print("Nombre a buscar: ");
+                    String buscar = sc.nextLine();
+                    int pos = ctCancion.buscarPorNombre(buscar);
+                    if (pos != -1)
+                        System.out.println("Canción encontrada en posición: " + pos);
+                    else
+                        System.out.println("No se encontró la Canción.");
+                    break;   
+                case 4:
+                     ctCancion.listar();
+                    break;
+                default:
+                    System.out.println("Opción inválida, intenta de nuevo.");
+            }
+        }while(opcionCancion !=0);
+    }
 
 
 
